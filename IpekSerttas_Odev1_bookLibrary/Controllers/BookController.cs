@@ -20,7 +20,7 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        public List<Book> bookList;
+        public List<Book> bookList; //book türünde bir liste
 
         public BookController()
         {
@@ -58,36 +58,36 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
             return Ok(book); //200
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetBookWithId([FromQuery] int id)
-        //{
-        //    if (id == 0)
-        //    {
-        //        return Unauthorized(); //401
-        //    }
-        //    var book = bookList.Where(x => x.Id == id).FirstOrDefault();
-        //    if (book is null)
-        //    {
-        //        return NotFound(); //404
-        //    }
-        //    return Ok(book); //200
-        //}
+        [HttpGet("{id}")]
+        public IActionResult GetBookWithId([FromQuery] int id)
+        {
+            if (id == 0)
+            {
+                return Unauthorized(); //401
+            }
+            var book = bookList.Where(x => x.Id == id).FirstOrDefault();
+            if (book is null)
+            {
+                return NotFound(); //404
+            }
+            return Ok(book); //200
+        }
 
-        ////HttpPost ile FromBody kullanarak listeye yeni bir kayit eklemek.
-        //[HttpPost]
-        //public ActionResult<List<Book>> PostBookAdd([FromBody] Book request)
-        //{
-        //    if (request == null)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    if (string.IsNullOrEmpty(request.KitapAd))
-        //    {
-        //        return BadRequest();
-        //    }
-        //    bookList.Add(request);
-        //    return bookList;
-        //}
+        //HttpPost ile FromBody kullanarak listeye yeni bir kayit eklemek.
+        [HttpPost]
+        public ActionResult<List<Book>> PostBookAdd([FromBody] Book request)
+        {
+            if (request == null)
+            {
+                return BadRequest();
+            }
+            if (string.IsNullOrEmpty(request.KitapAd))
+            {
+                return BadRequest();
+            }
+            bookList.Add(request);
+            return bookList;
+        }
 
         //HttpPut ile mevcut kaydi guncellemek.
         [HttpPut]

@@ -37,7 +37,7 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
 
         //HttpPost ile tum kayitlari listeleme.
         [HttpPost]
-        public List<Book> PostBook()
+        public List<Book> ListBook()
         {
             return bookList;
         }
@@ -59,7 +59,7 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetBookWithId([FromQuery] int id)
+        public IActionResult GetBookById([FromQuery] int id)
         {
             if (id == 0)
             {
@@ -75,7 +75,7 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
 
         //HttpPost ile FromBody kullanarak listeye yeni bir kayit eklemek.
         [HttpPost]
-        public ActionResult<List<Book>> PostBookAdd([FromBody] Book request)
+        public ActionResult<List<Book>> AddBook([FromBody] Book request)
         {
             if (request == null)
             {
@@ -91,7 +91,7 @@ namespace IpekSerttas_Odev1_bookLibrary.Controllers
 
         //HttpPut ile mevcut kaydi guncellemek.
         [HttpPut]
-        public ActionResult<List<Book>> PutBook(int id, [FromBody] Book request)
+        public ActionResult<List<Book>> UpdateBook(int id, [FromBody] Book request)
         {
             var guncelle = bookList.Where(x => x.Id == id).FirstOrDefault();
             if(guncelle is null)
